@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<!---Stysheet import--->	
+<style type="text/css" media="all">@import "../css/master.css";</style>  <style type="text/css" media="all">@import "../css/master.css";</style>
+</head>
+<body>
+<div id="page-container">
+	<!-----------------------------------------------------------Main Navigation area Starts---------------------------------------------------->
+    <div id="main-nav">
+	<dl class="hidden">
+    <!----Giving links to Various components of the assignment---->
+    <!----About.html is our main page,
+    	  graphs.html is our page for google charts and stuff
+          applet.html is linked to the applet containing the mashup
+          statistics.html is linked to the hypothesis testing and scatterplot part---->
+		<dt id="about"><a href="about.html">About</a></dt>
+		<dt id="services"><a href="graphs2.html">Histograms</a></dt>
+		<dt id="portfolio"><a href="applet.html">Mashup</a></dt>
+		<dt id="contact"><a href="stastics.html">Statistics</a></dt>
+	</dl>
+</div>
+	<!-----------------------------------------------------------Main Navigation area Ends------------------------------------------------------>
+    
+    <!-----------------------------------------------------------Header area Starts------------------------------------------------------------->
+<div id="header">
+	<h1><img src="../images/general/logo.jpg" 
+		width="236" height="36" alt="Enlighten Designs" border="0" /></h1>
+</div>
+	<!-----------------------------------------------------------Header area Ends--------------------------------------------------------------->
+    
+    <!-----------------------------------------------------------Sidebar area Starts------------------------------------------------------------>
+	<div id="sidebar-a">
+	<div class="padding">
+    The data is taken from the site http://www.prsindia.org/MPTrack-15.xls
+		You can Enter the State you want analyse and the the basis on which you want to analyse the state.<br /><br />
+	<!---form to take input from user that on what basis to colour the map--->
+    <form><b>On The Basis of:</b>    
+	<select name=select1 id="s1" onchange='OnChange();'><!---call Onchange() function on change in value of dropdown list entry--->			
+	<option>Number of MPs</option>
+	<option>Percentage of Female Members</option>
+	<option>Average Attendance of MPs</option>
+	<option>Average Age of MPs</option>
+	</select>
+	</form>
+    <!---for input from drop down ends--->
+	</div>
+</div>
+	 <!-----------------------------------------------------------Sidebar area Ends-------------------------------------------------------------->
+	
+    
+     <!-----------------------------------------------------------Content area Starts------------------------------------------------------------>
+    <div id="content">
+    <div id="map_canvas" align = "center"></div>
+    
+     <!-----------------------------------------------------------Google map Starts-------------------------------------------------------------->
+	<script type='text/javascript' src='https://www.google.com/jsapi'></script>
+	<script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});						//importing the geomap package from google visualizations
+   google.setOnLoadCallback(drawMap);																//calling back the main function
+
+    function drawMap(col) {																		//mainfunction that describes the map to be drawn
+      var data = google.visualization.arrayToDataTable([										//data table from an array which contains the data
+	  ['State','mps','sex_ratio','attendance','age'],
+	  ['Andaman and Nicobar Islands',1,0,76,62],['Andhra Pradesh',42,13,62,55],['Arunachal Pradesh',2,0,78,49],['Assam',14,16,81,63],['Bihar',41,13,84,59],['Chandigarh',1,0,0,64],['Chhattisgarh',12,20,64,54],['Dadra and Nagar Haveli',1,0,50,40],['Daman and Diu',1,0,63,57],['Delhi',7,16,55,57],['Goa',2,0,87,62],['Gujarat',26,18,70,57],['Haryana',11,22,62,47],['Himachal Pradesh',4,0,66,58],['Jammu and Kashmir',6,0,74,66],['Jharkhand',15,0,55,57],['Karnataka',29,3,62,56],['Kerala',20,0,71,58],['Lakshadweep',1,0,85,30],['Madhya Pradesh',29,26,77,55],['Maharashtra',48,6,64,56],['Manipur',2,0,99,62],['Meghalaya',2,100,0,38],['Mizoram',1,0,97,76],['Nagaland',1,0,92,69],['Orissa',21,0,72,54],['Puducherry',1,0,0,65],['Punjab',13,44,72,55],['Rajasthan',25,13,73,55],['Sikkim',1,0,90,58],['Tamil Nadu',39,2,61,56],['Tripura',2,0,79,73],['Uttar Pradesh',81,19,74,52],['Uttaranchal',5,0,65,61],['West Bengal',43,19,62,59]]);																				//data input using eclipse code
+	  var view = new google.visualization.DataView(data);										//dataview to select the desired columns
+	  if (col=='[object Event]') col=1;							//default column value
+	  view.setColumns([0,col]);
+	  var options = {};																			//setting up the options to draw the geomap
+      options['region'] = 'IN';									//code for !ndia
+      options['colors'] = [0xffea01, 0x09fe03, 0x80150d]; 		//colors
+      options['dataMode'] = 'regions';							//to get a state map
+	  options['magnifyingGlass'] = {enable: true, zoomFactor: 5.0};
+      var container = document.getElementById('map_canvas');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(view, options);
+    };
+
+  </script>
+  
+  <script>
+	function OnChange()																		//function that call the main function on user input
+	{	
+		var x=document.getElementById("s1");
+		var y=x.selectedIndex+1;	
+		drawMap(y);
+		return true;
+	}
+	</script>
+    
+    <!-----------------------------------------------------------Google map Ends-------------------------------------------------------------->
+</div>	
+	<div id="footer">
+	<div id="altnav">
+		<a href="#">About</a> - 
+		<a href="#">Data</a> - 
+		<a href="#">Visualisations</a> - 
+		<a href="#">Contact Us</a> - 
+		<a href="#">Other</a>
+	</div>
+    <p>From:-<br />
+    	Vaibhav Devmurari<br />
+        Mayank Raj<br />
+        Jasmeet Saini</p>
+</div>
+</div>
+</body>
+</html>

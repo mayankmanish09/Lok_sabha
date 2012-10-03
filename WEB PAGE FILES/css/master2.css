@@ -1,0 +1,133 @@
+body {
+	font-family: Arial, Helvetica, Verdana, Sans-serif;
+	font-size: 12px;
+	color: #666666;
+	text-align: center;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+	float: right;
+	margin-top: 102px;
+	padding-right: 500px;
+}
+
+#page-container {
+	width: 760px;
+	margin: auto;
+	text-align: left;
+}
+
+/* Main Navigation */
+#main-nav { height: 50px;
+padding-left: 11px;  }
+#main-nav dl { margin: 0; padding: 0; }
+/* IE5 Mac Hack \*/ 
+/*/ 
+#main-nav { padding-left: 11px; overflow: hidden; } 
+/* End Hack */
+#main-nav dt { float: left; }
+#main-nav dt a {
+	display: block;
+	height: 0px !important;
+	height /**/:50px; /* IE 5/Win hack */ 
+	padding: 50px 0 0 0;
+	overflow: hidden;
+	background-repeat: no-repeat;
+}
+#main-nav dt a:hover {
+	background-position: 0 -100px;
+}
+#main-nav dt#about,
+#main-nav dt#about a { width: 71px; background-image: url(../images/nav/about.gif); }
+
+#main-nav dt#services,
+#main-nav dt#services a { width: 80px; background-image: url(../images/nav/graphs.gif); }
+
+#main-nav dt#portfolio,
+#main-nav dt#portfolio a { width: 90px; background-image: url(../images/nav/applet.gif); }
+
+#main-nav dt#contact,
+#main-nav dt#contact a { width: 106px; background-image: url(../images/nav/statistics.gif); }
+body.about dt#about,
+body.about dt#about a,
+body.about dt#about a:hover,
+body.services dt#services,
+body.services dt#services a,
+body.services dt#services a:hover,
+body.portfolio dt#portfolio,
+body.portfolio dt#portfolio a,
+body.portfolio dt#portfolio a:hover,
+body.contact dt#contact,
+body.contact dt#contact a,
+body.contact dt#contact a:hover {
+	background-position: 0 -100px;
+}
+body.about #header {
+	height: 150px;
+	background: #db6d16
+		    url(../images/headers/about1.jpg);
+}
+
+#header {
+	height: 150px;
+	background: #db6d16
+	            url(../images/headers/about1.jpg);
+}
+
+#sidebar-a {
+	float: right;
+	width: 280px;
+	line-height: 18px;
+}
+#sidebar-a .padding {
+	padding: 25px;
+}
+
+#content {
+	margin-right: 280px;
+	line-height: 18px;
+}
+#content .padding {
+	padding: 25px;
+}
+#content h2 {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 15px;
+}
+#content p {
+	margin: 0;
+	padding: 0;
+	padding-bottom: 15px;
+}
+#content a:hover {
+	color: #db6d16;
+	}
+	
+#footer {
+	clear: both;
+	font-family: Tahoma, Arial, Helvetica, Sans-serif;
+	font-size: 10px;
+	color: #c9c9c9;
+	border-top: 1px solid #efefef;
+	padding: 13px 25px;
+	line-height: 18px;
+}
+#footer #altnav {
+	width: 350px;
+	float: right;
+	text-align: right;
+}
+#footer a {
+	color: #c9c9c9;
+	text-decoration: none;
+}
+#footer a:hover {
+	color: #db6d16;
+}
+html, body {
+	margin: 0;
+	padding: 0;
+}

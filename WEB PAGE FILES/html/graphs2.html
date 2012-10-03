@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+    <!------------------------------------------------------------------Stylesheet-------------------------------------------------------------->
+<style type="text/css" media="all">@import "../css/master2.css";</style>  <style type="text/css" media="all">@import "../css/master2.css";</style>
+</head>
+
+
+<body>
+
+<div id="page-container">
+	<!-----------------------------------------------------------Main Navigation area Starts---------------------------------------------------->
+    <div id="main-nav">
+	<dl class="hidden">
+    <!----Giving links to Various components of the assignment---->
+    <!----About.html is our main page,
+    	  graphs.html is our page for google charts and stuff
+          applet.html is linked to the applet containing the mashup
+          statistics.html is linked to the hypothesis testing and scatterplot part---->
+		<dt id="about"><a href="about.html">About</a></dt>
+		<dt id="services"><a href="graphs2.html">Histograms</a></dt>
+		<dt id="portfolio"><a href="applet.html">Mashup</a></dt>
+		<dt id="contact"><a href="statistics.html">Statistics</a></dt>
+	</dl>
+</div>
+	<!-----------------------------------------------------------Main Navigation area Ends------------------------------------------------------>
+    
+    <!-----------------------------------------------------------Header area Starts------------------------------------------------------------->
+<div id="header">
+	<h1><img src="../images/general/logo.jpg" 
+		width="236" height="36" alt="Enlighten Designs" border="0" /></h1>
+</div>
+	<!-----------------------------------------------------------Header area Ends--------------------------------------------------------------->
+    
+    <!-----------------------------------------------------------Sidebar area Starts------------------------------------------------------------>
+	<div id="sidebar-a">
+	<div class="padding">
+	<b>The data is been taken from the site<br />
+	Site :- <a href = "http://www.prsindia.org">http://www.prsindia.org</a></b><br />
+		<br /><b>Please choose the state that you want to analyse and the basis on which you would like to analyse from below.</b><br /><br />
+        
+        <!--------------------Form to take input from the user that which state he wants to analyse and on what basis--------------------------->
+        
+	<form><b><u>Analyzing  State :</b></u> 
+	<select name=select1 id="s1" onchange='OnChange();'>		<!--Put values here-->
+	<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+	<option value="Andhra Pradesh">Andhra Pradesh</option>
+	<option value="Arunachal Pradesh">Arunachal Pradesh</option>
+	<option value="Assam">Assam</option>
+	<option value="Bihar">Bihar</option>
+	<option value="Chandigarh">Chandigarh</option>
+	<option value="Chhattisgarh">Chhattisgarh</option>
+	<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+	<option value="Daman and Diu">Daman and Diu</option>
+	<option value="Delhi">Delhi</option>
+	<option value="Goa">Goa</option>
+	<option value="Gujarat">Gujarat</option>
+	<option value="Haryana">Haryana</option>
+	<option value="Himachal Pradesh">Himachal Pradesh</option>
+	<option value="Jammu and Kashmir">Jammu and Kashmir</option>
+	<option value="Jharkhand">Jharkhand</option>
+	<option value="Karnataka">Karnataka</option>
+	<option value="Kerala">Kerala</option>
+	<option value="Lakshadweep">Lakshadweep</option>
+	<option value="Madhya Pradesh">Madhya Pradesh</option>
+	<option value="Maharashtra">Maharashtra</option>
+	<option value="Manipur">Manipur</option>
+	<option value="Meghalaya">Meghalaya</option>
+	<option value="Mizoram">Mizoram</option>
+	<option value="Nagaland">Nagaland</option>
+	<option value="Orissa">Orissa</option>
+	<option value="Puducherry">Puducherry</option>
+	<option value="Punjab">Punjab</option>
+	<option value="Rajasthan">Rajasthan</option>
+	<option value="Sikkim">Sikkim</option>
+	<option value="Tamil Nadu">Tamil Nadu</option>
+	<option value="Tripura">Tripura</option>
+	<option value="Uttar Pradesh">Uttar Pradesh</option>
+	<option value="Uttarakhand">Uttarakhand</option>
+	<option value="West Bengal">West Bengal</option>on>
+	</select>
+	</form>
+	
+	<form><b><u>On The Basis of:</b></u>    
+	<select name=select2 id="s2" onchange='OnChange();'>			
+	<option>Party Distribution</option>
+	<option>Educational Qualification</option>
+	<option>Age Distribution</option>
+	<option>Attendance</option>
+	</select>
+	</form>
+    <!-------------------------------------------------------Input taking drop down ends here----------------------------------------------------->
+    
+    
+    <!---Giving links to mapview, comparison and visualizations--->
+	<br />
+	Links to :-<br />
+	<a href = "Piechart_final.html"><img src = "../images/headings/comparison3.gif"></a><br />
+	<a href = "map2.html"><img src = "../images/headings/mapview3.gif"></a><br />
+	<a href = "visualizations.html"><img src = "../images/headings/visualization3.gif"></a>
+	</div>
+</div>
+	<!-----------------------------------------------------------Sidebar area Ends--------------------------------------------------------------->
+    
+    
+	<!-----------------------------------------------------------Content area Starts------------------------------------------------------------>
+	<div id="content">
+    <div id="chart_div" align = "center"></div>
+    <!------------------------------------------------------------Google charts Starts----------------------------------------------------------->
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load('visualization', '1', {packages: ['corechart']});//using package corechart
+    </script>
+    <script type="text/javascript">
+	function drawVisualization(state,which) {						//function that takes input of state and the type of graph and draws the chart
+    var query = new google.visualization.Query(
+        'https://docs.google.com/spreadsheet/ccc?key=0AlM1206u-DAPdFpReW04cUhpdW11aUN3LWVyZzV0RWc');		//link to the spreadsheet
+		if (state=='[object Event]') state='Andaman and Nicobar Islands';									//default value of state
+		if (which==undefined) which="A";																	//default value of type
+	var pass = 'SELECT '+which+',E,I,K,M,O,S WHERE I = "'+state+'"'; 
+    query.setQuery(pass);																					// Apply query language statement.			
+	query.send(handleQueryResponse);																// Send the query with a callback function.
+  }
+
+  function handleQueryResponse(response) {																	//the callback function
+    if (response.isError()) {
+      alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+      return;
+    }
+
+		var data = response.getDataTable();																	//the data table formed from the query
+		var state = data.getValue(0,2);																		//value of state
+		var which = data.getValue(0,0);																		//value of type
+		
+		//-------------------------------------------------------1st Pie Chart Begins--------------------------------------------------------//
+		var i=0;
+		var count=0;
+		data.sort([{column: 3}]);
+		var data2 = new Array();
+		data2[1] = new google.visualization.DataTable();										//data table that contains party vs no of mps
+        data2[1].addColumn('string', 'Party');
+		data2[1].addColumn('number', 'MPs');
+		data2[1].addRow([data.getValue(0,3), 1]);
+		for (i = 1; i < data.getNumberOfRows(); i++)											//making the table
+			{var x = data.getValue(i,3);
+			 if (data2[1].getValue(count,0)!=x)
+				{count++;
+				 data2[1].addRow([x, 1]);
+				}
+			else
+				{var p=data2[1].getValue(count , 1)+1;
+				data2[1].setValue(count, 1, p);
+				}
+			}
+	   	
+		//-------------------------------------------------------2nd Pie Chart Begins--------------------------------------------------------//
+		data.sort([{column: 4}]);
+		data2[2] = new google.visualization.DataTable();										//data table that contains education vs no of mps
+        data2[2].addColumn('string', 'education');
+		data2[2].addColumn('number', 'MPs');
+		i=0;
+		count=0;
+		data2[2].addRow([data.getValue(0,4), 1]);
+		for (i=1;i<data.getNumberOfRows();i++)													//making the table
+			{var x=data.getValue(i,4);
+			 if (data2[2].getValue(count,0)!=x)
+				{count++;
+				 data2[2].addRow([x, 1]);
+				}
+			else
+				{var p=data2[2].getValue(count , 1)+1;
+				data2[2].setValue(count, 1, p);
+				}
+			}
+		
+		//-------------------------------------------------------3rd Pie Chart Begins--------------------------------------------------------//
+		data.sort([{column: 5}]);
+		data2[3] = new google.visualization.DataTable();										//data table that contains age group vs no of mps
+        data2[3].addColumn('string', 'age');
+		data2[3].addColumn('number', 'MPs');
+		i=0;
+		count=0;
+		var y = data.getValue(0,5)-(data.getValue(0,5)%10);
+		data2[3].addRows([[y+' - '+(y+10), 1]]);
+		for (i=1;i<data.getNumberOfRows();i++)													//making the table
+			{var x1=data.getValue(i,5)-(data.getValue(i,5)%10);
+			var x = x1+' - '+(x1+10);
+			 if (data2[3].getValue(count,0)!=x)
+				{count++;
+				 data2[3].addRows([[x, 1]]);
+				}
+			else
+				{var p=data2[3].getValue(count , 1)+1;
+				data2[3].setValue(count, 1, p);
+				}
+			}
+		
+		//-------------------------------------------------------4th Pie Chart Begins--------------------------------------------------------//
+		data.sort([{column: 6}]);
+		data2[4] = new google.visualization.DataTable();										//data table that contains attendance vs no of mps
+        data2[4].addColumn('string', 'attendance');
+		data2[4].addColumn('number', 'MPs');
+		i=0;
+		count=0;
+		y = data.getValue(0,6)-(data.getValue(0,6)%10);
+		data2[4].addRows([[y+' - '+(y+10), 1]]);
+		for (i=1;i<data.getNumberOfRows();i++)													//making the table
+			{var x2=data.getValue(i,6)-(data.getValue(i,6)%10);
+			var x3 = x2+' - '+(x2+10);
+			 if (data2[4].getValue(count,0)!=x3)
+				{count++;
+				 data2[4].addRows([[x3, 1]]);
+				}
+			else
+				{var p1=data2[4].getValue(count , 1)+1;
+				data2[4].setValue(count, 1, p1);
+				}
+			}
+		
+		// Set chart options
+	   var options=new Array();
+	   options[1] = {'title':'Number of MP\'s from ' + state,									//options for the 1st piechart
+                       'width':400,
+					   'is3D':true,
+                       'height':400};
+					   
+		options[2] = {'title':'Educational Qualification of MP\'s from ' + state,				//options for the 2nd piechart
+                       'width':400,
+					   'is3D':true,
+                       'height':400};
+
+		options[3] = {'title':'Age Distribution of the MP\'s in the State ' + state,			//options for the 3rd piechart
+                       'width':400,
+					   'is3D':true,
+                       'height':400};
+		
+		options[4] = {'title':'Attendance of the MP\'s in the State ' + state,					//options for the 4th piechart
+                       'width':400,
+					   'is3D':true,
+                       'height':400};
+		
+        var table1 = new google.visualization.PieChart(document.getElementById('chart_div'));	//Instantiate and draw our chart, passing in some
+													 											//options.
+        table1.draw(data2[which], options[which]);
+		
+  }
+      google.setOnLoadCallback(drawVisualization);
+    </script>
+	
+	<script>
+	function OnChange()																			//functions that callbacks the main function on 
+																								//change in options.
+	{	
+		var x=document.getElementById("s1");													//reading from the 1st drop down
+		var y=x.selectedIndex;
+		var z=x.options[y].value
+		x=document.getElementById("s2");														//reading from the 2nd drop down
+		y=x.selectedIndex+1;
+		var p = "B";
+		if(y==1) {p="A";}
+		else if(y==2) {p="B";} 
+		else if(y==3) {p="C";} 
+		else if(y==4) {p="D";}
+		drawVisualization(z , p);																//calling the main function
+		return true;
+	}
+	</script>
+    <!------------------------------------------------------------Google charts Ends------------------------------------------------------------->
+    
+    
+    <!------------------------------------------------------------Footer area Starts------------------------------------------------------------->
+	<div id="footer">
+	<div id="altnav">
+		<a href="about.html">About</a> - 
+		<a href="#">Data</a> - 
+		<a href="visualizations.html">Visualisations</a> - 
+		<a href="#">Contact Us</a> - 
+		<a href="#">Other</a>
+	</div>
+    <p>From:-<br />
+    	Vaibhav Devmurari<br />
+        Mayank Raj<br />
+        Jasmeet Saini</p>
+</div>
+</div>
+	<!------------------------------------------------------------Footer area Ends--------------------------------------------------------------->
+</body>
+</html>

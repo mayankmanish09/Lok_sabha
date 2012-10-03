@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title>Treemap</title>
+    <!---importing the d3.js file that contains all the d3 functions--->
+    <script type="text/javascript" src="../js/d3.v2.js"></script>
+    <!---linking the css file for the buttons and the main treemap--->
+    <link type="text/css" rel="stylesheet" href="../css/treemap.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/button.css"/>
+  </head>
+  <body>
+    <div id="chart">
+      <a href = "treemap.html"><button id="view1">
+        15th Lok Sabha (View 1)
+      </button></a><a href = "treemap2.html"><button id="view2"><!---linking to the next view of the tree map containing the names of the mps--->
+        15th Lok Sabha (View 2)
+      </button></a>
+      <a href = "treemap_14.html"><button id="view1">
+        14th Lok Sabha (View 1)
+      </button></a><button id="view2" class = "active"><!---linking to the next view of the tree map containing the names of the mps--->
+        14th Lok Sabha (View 2)
+      </button>
+    </div>
+     <!-------------------------------------------------------------treemap.js------------------------------------------------------------------->
+    <!---some part of the code was taken fron the treemap.js available on the internet--->
+    <script type="text/javascript">
+    var width = 960,																				//defining the size of treemap
+    height = 500,
+    color = d3.scale.category20c();
+
+var treemap = d3.layout.treemap()
+    .size([width, height])
+    .sticky(true)
+    .value(function(d) { return d.size; });
+
+var div = d3.select("#chart").append("div")
+    .style("position", "relative")
+    .style("width", width + "px")
+    .style("height", height + "px");
+
+d3.json("../data/flare_14.json", function(json) {														//input json file containing the data
+  div.data([json]).selectAll("div")
+      .data(treemap.nodes)
+    .enter().append("div")
+      .attr("class", "cell")
+      .style("background", function(d) { return d.children ? color(d.name) : null; })
+      .call(cell)
+      .text(function(d) { return d.children ? null : d.name; });
+
+  d3.select("#size").on("click", function() {
+    div.selectAll("div")
+        .data(treemap.value(function(d) { return d.size; }))
+      .transition()
+        .duration(1500)
+        .call(cell);
+
+    d3.select("#size").classed("active", true);
+    d3.select("#count").classed("active", false);
+  });
+
+  d3.select("#count").on("click", function() {
+    div.selectAll("div")
+        .data(treemap.value(function(d) { return 1; }))
+      .transition()
+        .duration(1500)
+        .call(cell);
+
+    d3.select("#size").classed("active", false);
+    d3.select("#count").classed("active", true);
+  });
+});
+
+function cell() {
+  this
+      .style("left", function(d) { return d.x + "px"; })
+      .style("top", function(d) { return d.y + "px"; })
+      .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
+      .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
+}
+
+    </script>
+   	<!--------------------------------------------------------------end of treemap.js---------------------------------------------------------->
+  </body>
+</html>

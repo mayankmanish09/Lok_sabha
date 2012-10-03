@@ -1,0 +1,4 @@
+[{"name": "Punjab","children": [
+{"name": "Bharatiya Janata Party","children": [{"name": "Navjot Singh Sidhu", "colour": "#f9f0ab"}]},
+{"name": "Indian National Congress","children": [{"name": "Manish Tewari", "colour": "#f9f0ab"},{"name": "Mohinder Singh Kaypee", "colour": "#f9f0ab"},{"name": "Partap Singh Bajwa", "colour": "#f9f0ab"},{"name": "Preneet Kaur", "colour": "#f9f0ab"},{"name": "Ravneet Singh", "colour": "#f9f0ab"},{"name": "Santosh Chowdhary", "colour": "#f9f0ab"},{"name": "Sukhdev Singh Libra", "colour": "#f9f0ab"},{"name": "Vijay Inder Singla", "colour": "#f9f0ab"}]},
+{"name": "Shiromani Akali Dal","children": [{"name": "Harsimrat Kaur Badal", "colour": "#f9f0ab"},{"name": "Paramjit Kaur Gulshan", "colour": "#f9f0ab"},{"name": "Rattan Singh Ajnala", "colour": "#f9f0ab"},{"name": "Sher Singh Ghubaya", "colour": "#f9f0ab"}]}]}]
